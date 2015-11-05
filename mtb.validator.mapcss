@@ -1,0 +1,29 @@
+meta
+{
+  title: "Mountain bike specific rules";
+  version: "1.0";
+  description: "Rules which check the correct usage of  mountain bike specific tags.";
+  author: "naoliv, Stefan Bauer";
+  link: "https://wiki.openstreetmap.org/wiki/Key:mtb:scale";
+  baselanguage: "en_US";
+}
+
+way["mtb:scale:uphill"][!incline] {
+    throwWarning: tr("Way contains ''{0}'' but not ''{1}''.", "{0.key}", "{1.key}");
+}
+
+way["mtb:scale:uphill"][highway][highway !~ /path|track/] {
+    throwWarning: tr("Way contains ''{0}'' but is neither a track nor a path.", "{0.key}");
+}
+
+way["mtb:scale"]["mtb:scale" !~ /^[0-6][-+]?$/] {
+    throwWarning: tr("Invalid ''{0}'' value: ''{1}''", "{0.key}", "{0.value}");
+}
+
+way["mtb:scale:uphill"]["mtb:scale:uphill" !~ /^[0-5]$/] {
+    throwWarning: tr("Invalid ''{0}'' value: ''{1}''", "{0.key}", "{0.value}");
+}
+
+way["mtb:scale:imba"]["mtb:scale:imba" !~ /^[0-4]$/] {
+    throwWarning: tr("Invalid ''{0}'' value: ''{1}''", "{0.key}", "{0.value}");
+}
